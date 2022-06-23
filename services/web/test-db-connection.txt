@@ -1,0 +1,17 @@
+
+docker-compose exec db psql --username=hello_flask --dbname=hello_flask_dev
+
+When connected, try:
+\c hello_flask_dev
+or:
+\c <DATABASE_NAME>
+
+
+Other commands:
+
+Seed the db:
+docker-compose exec web python manage.py seed_db
+
+Create the db:
+docker-compose exec web python manage.py create_db
+

@@ -1,0 +1,64 @@
+
+(ve.gunipoc) ➜  gunipoc git:(main) ✗
+(ve.gunipoc) ➜  gunipoc git:(main) ✗  docker-compose exec web python manage.py create_db
+(ve.gunipoc) ➜  gunipoc git:(main) ✗
+(ve.gunipoc) ➜  gunipoc git:(main) ✗ docker-compose exec db psql --username=hello_flask --dbname=hello_flask_dev
+psql (13.7)
+Type "help" for help.
+
+hello_flask_dev=# \Z
+invalid command \Z
+Try \? for help.
+hello_flask_dev=# \z
+                                  Access privileges
+ Schema |     Name     |   Type   | Access privileges | Column privileges | Policies
+--------+--------------+----------+-------------------+-------------------+----------
+ public | users        | table    |                   |                   |
+ public | users_id_seq | sequence |                   |                   |
+(2 rows)
+
+hello_flask_dev=# \c hello_flask_dev
+You are now connected to database "hello_flask_dev" as user "hello_flask".
+hello_flask_dev=# \dt
+          List of relations
+ Schema | Name  | Type  |    Owner
+--------+-------+-------+-------------
+ public | users | table | hello_flask
+(1 row)
+
+hello_flask_dev=# SELECT * FROM USERS;
+ id | email | active
+----+-------+--------
+(0 rows)
+
+hello_flask_dev=#
+
+SO FAR LOOKS GOOD, BUT WE ARE CURRENTLY DEBUGGING WHY I GET THIS ERROR WHEN I TRY seed_db:
+------------------------------------------
+(ve.gunipoc) ➜  web git:(main) ✗ docker-compose exec web python manage.py seed_db
+Traceback (most recent call last):
+  File "/usr/src/app/manage.py", line 29, in <module>
+    cli()
+  File "/usr/local/lib/python3.9/site-packages/click/core.py", line 1130, in __call__
+    return self.main(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/flask/cli.py", line 579, in main
+    return super().main(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/click/core.py", line 1055, in main
+    rv = self.invoke(ctx)
+  File "/usr/local/lib/python3.9/site-packages/click/core.py", line 1657, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "/usr/local/lib/python3.9/site-packages/click/core.py", line 1404, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/usr/local/lib/python3.9/site-packages/click/core.py", line 760, in invoke
+    return __callback(*args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/click/decorators.py", line 26, in new_func
+    return f(get_current_context(), *args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/flask/cli.py", line 427, in decorator
+    return __ctx.invoke(f, *args, **kwargs)
+  File "/usr/local/lib/python3.9/site-packages/click/core.py", line 760, in invoke
+    return __callback(*args, **kwargs)
+  File "/usr/src/app/manage.py", line 21, in seed_db
+    db.session.add(User(email="user@example.com"))
+NameError: name 'User' is not defined
+---------------------------------------------
+
