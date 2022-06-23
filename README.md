@@ -45,7 +45,7 @@ http://localhost:5000/
 
 For the Python Docker image I will use 3.9.13 instead of 3.9.5.
 Note that our VE is currently derived from 3.10.4 and this high version
-did cause us to HAVE to upgrade flask, so sometimes there are issues from
+did cause us to HAVE to upgrade Flask, so sometimes there are issues from
 going for the latest versions, but it is still the best strategy.
 
 ------------------------------------
@@ -56,5 +56,63 @@ I usually do both pip and setuptools.
 RUN pip install --upgrade setuptools
 
 --------------------------
+
+The flask app comes up fine under docker compose. Now turning to Postgres,
+the tutorial specifies the image: postgres:13-alpine
+Later I might try a newer postgres image, after I get 13-alpine working:
+
+postgres:14.4-bullseye
+
+-----------------------------------
+
+I increased the version of psycopg2-binary from 2.8.6 to 2.9.3.
+
+The Flask-SQLAlchemy version has no upgrades available yet. It is the latest.
+
+------------------------------------
+
+Everything looks good, in-line with the tutorial so far:
+(ve.gunipoc) ➜  web git:(main) ✗ docker volume inspect flask-on-docker_postgres_data
+
+[
+{
+"CreatedAt": "2022-06-23T12:57:02Z",
+"Driver": "local",
+"Labels": {
+"com.docker.compose.project": "flask-on-docker",
+"com.docker.compose.version": "2.6.0",
+"com.docker.compose.volume": "postgres_data"
+},
+"Mountpoint": "/var/lib/docker/volumes/flask-on-docker_postgres_data/_data",
+"Name": "flask-on-docker_postgres_data",
+"Options": null,
+"Scope": "local"
+}
+]
+(ve.gunipoc) ➜  web git:(main) ✗
+
+---------------------------------------
+
+docker-compose exec db psql --username=hello_flask --dbname=hello_flask_dev
+
+hello_flask_dev=# \c hello_flask_devv
+FATAL:  database "hello_flask_devv" does not exist
+Previous connection kept
+hello_flask_dev=# \c hello_flask_dev
+You are now connected to database "hello_flask_dev" as user "hello_flask".
+hello_flask_dev=# \z
+Access privileges
+Schema |     Name     |   Type   | Access privileges | Column privileges | Policies
+--------+--------------+----------+-------------------+-------------------+----------
+public | users        | table    |                   |                   |
+public | users_id_seq | sequence |                   |                   |
+(2 rows)
+
+hello_flask_dev=#
+
+------------------------------------------------
+
+
+
 
 

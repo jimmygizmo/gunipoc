@@ -3,4 +3,7 @@ flask==2.1.2
 
 python-dotenv==0.20.0
 
+Flask-SQLAlchemy==2.5.1
+
+psycopg2-binary==2.9.3
 
