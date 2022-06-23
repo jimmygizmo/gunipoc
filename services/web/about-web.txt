@@ -1,0 +1,3 @@
+The web entrypoint.sh script expects nc (netcat) to be installed on the host.
+The docs indicate nc needs to be installed, maybe the dev machine but specifically into the container by the Dockerfile.
+

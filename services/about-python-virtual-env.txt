@@ -1,0 +1,56 @@
+Pyenv and Pyenv-Virtualenv is used and is highly recommended over any other method.
+
+The virtual environment for this project is named according to my standard as: ve.gunipoc
+It is derived from this Python version 3.10.4.
+
+Note that the Python base image we are using has Python 3.9.5, so really we should create a new
+VE using that exact version and may do that later. The whole point is to have your versions
+match exactly everywhere, so you eliminate unknowns and reduce losses from unnecessary problems
+caused by version mismatches. (Sometimes mysterious and hard to detect problems; problems which
+are easily avoided through disciplined development and testing version management methodologies.)
+
+TODO: Change VE to 3.9.5 to match the Python base image version.
+
+A .python-version file is used to control the Python version and the virtual environment.
+It of course contains 've.gunipoc'.
+
+If you are not familiar with Pyenv and using Python virtual environments in this manner,
+please do learn it. This is by far the best method, and I base that opinion on decades of industry
+experience. Use these tools and then match all of your versions exactly and also pin all
+versions thus controlling automatic upgrades; maybe even store stable base images (Docker).
+This is how best to perform your profession of Software Engineering. Don't leave variables
+uncontrolled, which you can easily control with the right tool. Eliminate unknowns, so you can
+do better engineering and deliver a more stable, higher-quality product or service and thus
+maximize your reputation as a professional. Pyenv and Pyenv Virtualenv are key technologies for this.
+
+Here is my prompt where I issue the command 'pyenv versions'. I have left just the relevant entries in the output.
+Notice my prompt shows that the 've.gunipoc' virtual environment is active, and this is because of the
+.python-version file present in the root of this project.
+
+(ve.gunipoc) ➜  gunipoc git:(main) pyenv versions
+  system
+  2.7.18
+  3.10.3
+  3.10.4
+  3.10.4/envs/ve.dataspell
+  3.10.4/envs/ve.gunipoc
+  3.10.4/envs/ve.pyrithm
+  3.8.10
+  3.8.10/envs/ve.azsvc
+  3.9.10
+  3.9.10/envs/ve.bblend
+  3.9.11
+  3.9.11/envs/ve.nginxpoc
+  ve.azsvc
+  ve.bblend
+  ve.dataspell
+* ve.gunipoc (set by /Users/username/REPOS/gunipoc/.python-version)
+  ve.nginxpoc
+  ve.pyrithm
+(ve.gunipoc) ➜  gunipoc git:(main) pyenv versions
+
+----------------------------------------
+
+You can see there are a handful of different Python versions and different project-specific Python virtual
+environments currently in use on my system. Pyenv works the same and works great on all platforms.
+
