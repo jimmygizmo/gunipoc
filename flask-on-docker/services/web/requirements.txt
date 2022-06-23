@@ -1,0 +1,6 @@
+
+flask==2.1.2
+
+python-dotenv==0.20.0
+
+

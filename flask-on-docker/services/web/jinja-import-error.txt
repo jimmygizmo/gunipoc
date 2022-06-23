@@ -1,0 +1,8 @@
+(ve.gunipoc) ➜  web git:(main) ✗ python manage.py run
+Traceback (most recent call last):
+  File "/Users/bilbo/GITREPOS/gunipoc/flask-on-docker/services/web/manage.py", line 1, in <module>
+    from flask.cli import FlaskGroup
+  File "/Users/bilbo/.pyenv/versions/ve.gunipoc/lib/python3.10/site-packages/flask/__init__.py", line 14, in <module>
+    from jinja2 import escape
+ImportError: cannot import name 'escape' from 'jinja2' (/Users/bilbo/.pyenv/versions/ve.gunipoc/lib/python3.10/site-packages/jinja2/__init__.py)
+
