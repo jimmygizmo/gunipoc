@@ -1,5 +1,22 @@
 .idea/
 
+# If this was a real project with concerns about secrets in the repo, then
+# we might use the following entries to keep .env files out (or some of them.)
+# .env
+# .env.prod
+# .env.prod.db
+
+# This is the env section that came with this GitHub .gitignore template.
+# I moved this section up from down below for reference:
+# Environments
+#.env
+#.venv
+#env/
+#venv/
+#ENV/
+#env.bak/
+#venv.bak/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -102,15 +119,6 @@ celerybeat.pid
 
 # SageMath parsed files
 *.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
 
 # Spyder project settings
 .spyderproject
