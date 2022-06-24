@@ -62,3 +62,49 @@ Traceback (most recent call last):
 NameError: name 'User' is not defined
 ---------------------------------------------
 
+ I added this new db_debug2() method
+
+---- ---- ---- ----
+#### DEBUG 2
+# Adding the following to try to inspect the DB/tables from here
+from sqlalchemy import create_engine
+engine = create_engine("postgresql://hello_flask:hello_flask@db:5432/hello_flask_dev")
+from sqlalchemy import inspect
+inspector = inspect(engine)
+####
+
+@cli.command("db_debug2")
+def db_debug2():
+    print(inspector.get_table_names())
+    for table_name in inspector.get_table_names():
+        print("Table: %s" % table_name)
+        for column in inspector.get_columns(table_name):
+            print("  Column: %s" % column['name'])
+        print()
+
+---- ---- ---- ----
+
+Well the Users table looks good, but of course we are accessing it in a slightly different way than the code
+throwing the error, but this is good to confirm anyhow.
+
+(ve.gunipoc) ➜  gunipoc git:(main) ✗ docker-compose exec web python manage.py db_debug2
+The __main__ section in manage.py just executed. It's not important. I'm just telling you.
+Table: users
+  Column: id
+  Column: email
+  Column: active
+
+
+**!!**!!** IT WAS SIMPLY MISSING THE IMPORT OF USER.
+The tutorial code is correct. I simply missed that when typing in code changes. Sometimes it is smarter to just
+cut and paste the whole updated chunk of code, but I also like to make it a little harder on myself and type in
+individual changes after seeing them. Sometimes you create a bug like this, but you always learn a lot from
+fixing any bug, even ones you made during a type or missed item during a tutorial. That is the whole point of a
+tutorial, to figure things out in multiple ways and thus really learn the topic. It is better to read through the
+code of a tutorial as it changes and understand every little change. Don't just cut and past and rush through it.
+Yes you will avoid bugs like I just created (and then fixed .. after much debugging) .. but you might not learn
+anything doing it the 'easy' way. Of course if you are under the gun at work, then all bets are off and you have
+to get the thing working as fast as humanly possible. :)
+
+ --------------------------------------------
+

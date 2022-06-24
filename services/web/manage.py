@@ -1,6 +1,14 @@
 from flask.cli import FlaskGroup
 
-from project import app, db
+#### DEBUG 2
+# Adding the following to try to inspect the DB/tables from here
+from sqlalchemy import create_engine
+engine = create_engine("postgresql://hello_flask:hello_flask@db:5432/hello_flask_dev")
+from sqlalchemy import inspect
+inspector = inspect(engine)
+####
+
+from project import app, db, User
 
 
 cli = FlaskGroup(app)
@@ -28,24 +36,25 @@ def seed_db():
 # This did not reveal any method in session which could list or show all objects. I am debugging based on User not
 # seeming to be recognized as a 'name' in the session, like as if the class/table was never defined.
 @cli.command("db_debug")
-def db_session_debug():
-    print()
-    print()
+def db_debug():
+
+    print("\n\n")
     print(help(db.session))
-    print()
-    print()
-    print()
-    print()
-    dir(db.session)
-    print()
-    print()
-    print()
-    print()
+    print("\n\n")
     print(db.session)
-    print()
-    print()
+    print("\n\n")
+
+
+@cli.command("db_debug2")
+def db_debug2():
+    for table_name in inspector.get_table_names():
+        print("Table: %s" % table_name)
+        for column in inspector.get_columns(table_name):
+            print("  Column: %s" % column['name'])
+        print()
 
 
 if __name__ == "__main__":
+    print("The __main__ section in manage.py just executed. It's not important. I'm just telling you.")
     cli()
 

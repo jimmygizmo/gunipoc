@@ -9,9 +9,9 @@ or:
 
 Other commands:
 
-Seed the db:
-docker-compose exec web python manage.py seed_db
-
 Create the db:
 docker-compose exec web python manage.py create_db
+
+Seed the db:
+docker-compose exec web python manage.py seed_db
 
