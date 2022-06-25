@@ -1,10 +1,12 @@
 from flask.cli import FlaskGroup
-from project import app, db, User
+from project import app, db, User, config
 
 #### DEBUG 2
 # Adding the following to try to inspect the DB/tables from here
 from sqlalchemy import create_engine
-engine = create_engine("postgresql://hello_flask:hello_flask@db:5432/hello_flask_prod")
+#engine = create_engine("postgresql://hello_flask:hello_flask@db:5432/hello_flask_prod")
+engine = create_engine(config.Config.SQLALCHEMY_DATABASE_URI)
+
 from sqlalchemy import inspect
 inspector = inspect(engine)
 ####
