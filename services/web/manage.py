@@ -1,4 +1,5 @@
 from flask.cli import FlaskGroup
+from project import app, db, User
 
 #### DEBUG 2
 # Adding the following to try to inspect the DB/tables from here
@@ -8,7 +9,6 @@ from sqlalchemy import inspect
 inspector = inspect(engine)
 ####
 
-from project import app, db, User
 
 
 cli = FlaskGroup(app)
