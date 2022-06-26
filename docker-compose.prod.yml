@@ -7,6 +7,7 @@ services:
       - "1337:80"
     volumes:
       - static_volume:/home/app/web/project/static
+      - media_volume:/home/app/web/project/media
     depends_on:
       - web
 
@@ -14,18 +15,14 @@ services:
     build:
       context: ./services/web
       dockerfile: Dockerfile.prod
-# OLD:    command: python manage.py run -h 0.0.0.0
     command: gunicorn --bind 0.0.0.0:5000 manage:app
-# OLD:    volumes:
-# OLD:      - ./services/web/:/usr/src/app/
-    # expose - internal to other docker services only. not to host machine.
-    # use ports for mapping to host machine.
     expose:
       - 5000
     env_file:
       - ./.env.prod
     volumes:
       - static_volume:/home/app/web/project/static
+      - media_volume:/home/app/web/project/media
     depends_on:
       - db
 
@@ -33,14 +30,11 @@ services:
     image: postgres:13-alpine
     volumes:
       - postgres_data_prod:/var/lib/postgresql/data/
-# OLD:    environment:
-# OLD:      - POSTGRES_USER=hello_flask
-# OLD:      - POSTGRES_PASSWORD=hello_flask
-# OLD:      - POSTGRES_DB=hello_flask_dev
     env_file:
       - ./.env.prod.db
 
 volumes:
   postgres_data_prod:
   static_volume:
+  media_volume:
 

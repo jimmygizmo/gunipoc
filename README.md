@@ -112,6 +112,21 @@ hello_flask_dev=#
 
 ------------------------------------------------
 
+SKIPPING AHEAD: The entire tutorial worked out great and the code in this repo is in
+excellent condition and working order, a great starting point for a stack/app.
+
+You could compare this with their own offical repo here:
+https://github.com/testdrivenio/flask-on-docker
+
+I hand coded everything here in my JimmyGizmo/gunipoc repo and nothing was cut
+and paste from their tutorial or repo.
+
+One of the best tutorials I have done and the end result is incredibly valuable
+as a starting point for an excellent stack. I will be incorporating a lot of
+great things from here into Nucleus. This turned out to be much more than just
+switching from UWSGI to Gunicorn. I got a lot more out of it. I will even consider
+purchasing courses from TestDriven.io. It was that good.
+
 
 
 
